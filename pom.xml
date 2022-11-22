@@ -12,20 +12,25 @@
 	<artifactId>MedService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>MedService</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Final project for Java</description>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
-	<dependencies> <!-- зависимости -->
+	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-
 		<dependency>
-			<groupId>com.mysql</groupId>
-			<artifactId>mysql-connector-j</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -33,6 +38,14 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 	<repositories>
 		<repository>
 			<id>spring-milestones</id>
@@ -69,5 +82,4 @@
 			</releases>
 		</pluginRepository>
 	</pluginRepositories>
-
 </project>
