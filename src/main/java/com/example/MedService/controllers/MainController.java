@@ -8,9 +8,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     @GetMapping("/") // функция обрабатывает главную страничку
-    public String profile(Model model) {
+    public String signin(Model model) {
         model.addAttribute("title", "Вход в систему"); // передаем название странички
         return "signin";
+    }
+
+    @GetMapping("/profile") // функция обрабатывает главную страничку
+    public String profile(Model model) {
+        model.addAttribute("title", "Профиль"); // передаем название странички
+        return "profile";
     }
 
 }
