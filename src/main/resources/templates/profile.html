@@ -16,7 +16,7 @@
         #page {
             float: left;
             display: block;
-            width: 550px;
+            width: 560px;
             border: 1px;
             margin: 80px;
         }
@@ -52,9 +52,9 @@
 
 </head>
 <body>
-    <div id="bar" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style=" height: 1300px"> <!-- параметры всей фигни слева -->
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"> <!-- параметры суеты -->
-            <svg class="bi pe-none me-2" width="35" height="32"><use xlink:href="#abobus"></use></svg> <!-- настройки окна суеты и ссылочка -->
+    <div id="bar" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style=" height: 1300px">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <svg class="bi pe-none me-2" width="35" height="32"><use xlink:href="#profile"></use></svg>
             <span class="fs-4">Профиль</span>
         </a>
         <hr>
@@ -62,27 +62,26 @@
 
     <div id="page" class="d-flex flex-column flex-shrink-0 col-md-7 col-lg-8">
         <h4 class="mb-3">Профиль</h4>
-        <form class="needs-validation" novalidate="">
+        <form action>
             <div class="g-3">
                 <div class="col-sm-10">
                     <label for="last_Name" class="form-label">Фамилия*</label>
-                    <input type="text" class="form-control" id="last_Name">
+                    <input type="text" class="form-control" id="last_Name" required>
                 </div>
 
                 <div class="col-sm-10">
                     <label for="first_Name" class="form-label">Имя*</label>
-                    <input type="text" class="form-control" id="first_Name">
+                    <input type="text" class="form-control" id="first_Name" required>
                 </div>
 
                 <div class="col-sm-10">
                     <label for="middle_Name" class="form-label">Отчество</label>
                     <input type="text" class="form-control" id="middle_Name">
-                    <div class="invalid-feedback" wfd-invisible="true">
                 </div>
 
                 <div class="col-md-5">
                     <label for="spec" class="form-label">Специальность</label>
-                    <select class="form-select" id="spec" required="">
+                    <select class="form-select" id="spec">
                         <option value="">Выбрать...</option>
                         <option>Гастроэнтеролог</option>
                         <option>Дерматовенеролог</option>
@@ -98,37 +97,36 @@
 
                 <hr class="my-4">
 
-                <h5 class="mb-3">Рабочие дни</h5><div class="form-check form-check-inline">
+                <h5 class="mb-3">Рабочие дни</h5>
 
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="monday" value="monday">
-                        <label class="form-check-label" for="monday">пн</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="wednesday" value="wednesday">
-                        <label class="form-check-label" for="wednesday">ср</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="friday" value="friday" >
-                        <label class="form-check-label" for="friday">пт</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="sunday" value="sunday" >
-                        <label class="form-check-label" for="sunday">вс</label>
-                    </div>
-                    <br>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="tuesday" value="tuesday" >
-                        <label class="form-check-label" for="tuesday">вт</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="thursday" value="thursday" >
-                        <label class="form-check-label" for="thursday">чт</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="saturday" value="saturday" >
-                        <label class="form-check-label" for="saturday">сб</label>
-                    </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="monday" value="monday">
+                    <label class="form-check-label" for="monday">пн</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="tuesday" value="tuesday" >
+                    <label class="form-check-label" for="tuesday">вт</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="wednesday" value="wednesday">
+                    <label class="form-check-label" for="wednesday">ср</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="thursday" value="thursday" >
+                    <label class="form-check-label" for="thursday">чт</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="friday" value="friday" >
+                    <label class="form-check-label" for="friday">пт</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="saturday" value="saturday" >
+                    <label class="form-check-label" for="saturday">сб</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="sunday" value="sunday" >
+                    <label class="form-check-label" for="sunday">вс</label>
+                </div>
 
                 <hr class="my-4">
 
@@ -136,21 +134,22 @@
 
                 <div class="row gy-3">
                     <div class="col-md-6">
-                        <label for="timeFrom" class="form-label">с</label>
-                        <input type="text" class="form-control" id="timeFrom">
+                        <label for="timeFrom" class="form-label">с*</label>
+                        <input type="time" class="form-control" id="timeFrom" min="00:00" max="23:59" required>
                     </div>
 
                     <div class="col-md-6">
-                        <label for="timeTo" class="form-label">по</label>
-                        <input type="text" class="form-control" id="timeTo">
+                        <label for="timeTo" class="form-label">по*</label>
+                        <input type="time" class="form-control" id="timeTo" min="00:00" max="23:59" required>
                     </div>
                 </div>
 
                 <hr class="my-4">
-
-            <a href="/profile" class="w-100 btn btn-primary btn-lg" type="submit">Сохранить</a>
+            </div>
 
         </form>
+
+        <button class="w-100 btn btn-primary btn-lg" type="submit">Сохранить</button>
 
     </div>
 
