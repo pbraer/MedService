@@ -1,4 +1,4 @@
-package com.mysql.cj.jdbc;
+package com.example.MedService.entity;
 
 import java.sql.Connection;
 import java.sql.DriverPropertyInfo;

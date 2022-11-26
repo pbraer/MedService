@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.UUID;
 
+//@Repository
 public interface AccountRepository extends JpaRepository<Account, UUID>{
     @Query(value = "SELECT * FROM doctors", nativeQuery = true) // непонятно это что? как работает?
-    List<Account> findAllStudents();
+    List<Account> findAllDoctors();
 }
