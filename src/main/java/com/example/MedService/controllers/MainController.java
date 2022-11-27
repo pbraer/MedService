@@ -19,4 +19,10 @@ public class MainController {
         return "profile";
     }
 
+    @GetMapping("/onlinereg") // функция обрабатывает главную страничку
+    public String onlinereg(Model model) {
+        model.addAttribute("title", "Записаться к врачу"); // передаем название странички
+        return "onlinereg";
+    }
+
 }

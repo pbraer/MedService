@@ -13,7 +13,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>MedService</name>
 	<description>Final project for Java</description>
-
 	<properties>
 		<java.version>17</java.version>
 	</properties>
