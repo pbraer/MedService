@@ -40,10 +40,10 @@
 
 <div id="page" class="d-flex flex-column flex-shrink-0 col-md-7 col-lg-8">
     <h4 class="mb-3">Записаться к врачу</h4>
-    <form>
+    <form action="/clientReg" method="post">
         <div class="col-md-5">
-            <label for="choosespec" class="form-label">Специальность</label>
-            <select class="form-select" id="choosespec" required>
+            <label for="spec" class="form-label">Специальность</label>
+            <select class="form-select" id="spec" name="spec" required>
                 <option value="">Выбрать...</option>
                 <option>Гастроэнтеролог</option>
                 <option>Дерматовенеролог</option>
@@ -59,8 +59,8 @@
         <br>
 
         <div class="col-md-5">
-            <label for="choosedoc" class="form-label">Врач</label>
-            <select class="form-select" id="choosedoc" required>
+            <label for="doctor" class="form-label">Врач</label>
+            <select class="form-select" id="doctor" name="doctor" required>
                 <option value="">Выбрать...</option>
                 <option>Иванов А.А.</option>
             </select>
@@ -81,7 +81,7 @@
             <h5 class="mb-3">Время</h5>
 
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="time" value="time">
+            <input class="form-check-input" type="checkbox" id="time" name="time" value="time">
             <label class="form-check-label" for="time">9:00</label>
         </div>
 
