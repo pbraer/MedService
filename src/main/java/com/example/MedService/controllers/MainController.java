@@ -19,10 +19,16 @@ public class MainController {
         return "profile";
     }
 
-    @GetMapping("/onlinereg") // функция обрабатывает главную страничку
-    public String onlinereg(Model model) {
+    @GetMapping("/registration") // функция обрабатывает страницу с регистацией
+    public String registration(Model model) {
         model.addAttribute("title", "Записаться к врачу"); // передаем название странички
-        return "onlinereg";
+        return "registration";
+    }
+
+    @GetMapping("/schedule") // функция обрабатывает страницу с расписанием
+    public String schedule(Model model) {
+        model.addAttribute("title", "Расписание"); // передаем название странички
+        return "schedule";
     }
 
 }
