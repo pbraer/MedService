@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+CREATE DATABASE MedServ;
+USE MedServ;
+>>>>>>> origin/memareve
 SET GLOBAL time_zone = '+7:00';
 
 CREATE TABLE doctors (
