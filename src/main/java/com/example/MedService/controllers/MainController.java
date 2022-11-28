@@ -1,5 +1,7 @@
 package com.example.MedService.controllers;
 
+import com.example.MedService.dto.AccountDto;
+import com.example.MedService.dto.ClientReg;
 import com.example.MedService.dto.Login;
 import com.example.MedService.service.ServicePage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +25,36 @@ public class MainController {
         return "profile";
     }
 
+    @GetMapping("/registration") // функция обрабатывает страницу с регистрацией
+    public String registration(Model model) {
+        model.addAttribute("title", "Записаться к врачу"); // передаем название странички
+        return "registration";
+    }
 
+    @GetMapping("/schedule") // функция обрабатывает страницу с расписанием
+    public String schedule(Model model) {
+        model.addAttribute("title", "Расписание"); // передаем название странички
+        return "schedule";
+    }
+
+    // Обработка форм
     @Autowired(required = false)
     private ServicePage servicePage;
 
-    @PostMapping("/sign")
+    @PostMapping("/sign") // авторизация
     public void login(Login login){
         servicePage.createUser(login);
         System.out.printf("");
     }
+
+    @PostMapping("/docinfo") // информация о враче
+    public void changeDocInfo(AccountDto docAccount){
+    }
+
+    @PostMapping("/clientReg") // информация о враче
+    public void clientReg(ClientReg client){
+        servicePage.makeOrder(client);
+    }
+
 
 }
