@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <style>
         #bar {
-            float: left ;
+            float: left;
             display: block;
             width: 215px;
             border: 0px;
@@ -46,59 +46,122 @@
             width: 300px;
             height: 300px;
             border-radius: 50%;
-          }
+        }
 
     </style>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 </head>
 <body>
-    <div id="bar" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style=" height: 1300px"> <!-- параметры всей фигни слева -->
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"> <!-- параметры суеты -->
-            <svg class="bi pe-none me-2" width="35" height="32"><use xlink:href="#abobus"></use></svg> <!-- настройки окна суеты и ссылочка -->
-            <span class="fs-4">Профиль</span>
-        </a>
-        <hr>
-    </div>
+<div id="bar" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style=" height: 1300px">
+    <!-- параметры всей фигни слева -->
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <!-- параметры суеты -->
+        <svg class="bi pe-none me-2" width="35" height="32">
+            <use xlink:href="#abobus"></use>
+        </svg> <!-- настройки окна суеты и ссылочка -->
+        <span class="fs-4">Профиль</span>
+    </a>
+    <hr>
+</div>
 
-    <div id="page" class="d-flex flex-column flex-shrink-0 col-md-7 col-lg-8">
-        <h4 class="mb-3">Профиль</h4>
-        <form class="needs-validation" novalidate="">
-            <div class="g-3">
-                <div class="col-sm-10">
-                    <label for="last_Name" class="form-label">Фамилия*</label>
-                    <input type="text" class="form-control" id="last_Name">
-                </div>
+<div id="page" class="d-flex flex-column flex-shrink-0 col-md-7 col-lg-8">
+    <h4 class="mb-3">Профиль</h4>
+    <form class="needs-validation" novalidate="">
+        <div class="g-3">
+            <div class="col-sm-10">
+                <label for="last_Name" class="form-label">Фамилия*</label>
+                <input type="text" class="form-control" id="last_Name">
+            </div>
 
-                <div class="col-sm-10">
-                    <label for="first_Name" class="form-label">Имя*</label>
-                    <input type="text" class="form-control" id="first_Name">
-                </div>
+            <div class="col-sm-10">
+                <label for="first_Name" class="form-label">Имя*</label>
+                <input type="text" class="form-control" id="first_Name">
+            </div>
 
-                <div class="col-sm-10">
-                    <label for="middle_Name" class="form-label">Отчество</label>
-                    <input type="text" class="form-control" id="middle_Name">
-                    <div class="invalid-feedback" wfd-invisible="true">
+            <div class="col-sm-10">
+                <label for="middle_Name" class="form-label">Отчество</label>
+                <input type="text" class="form-control" id="middle_Name">
+                <div class="invalid-feedback" wfd-invisible="true">
                 </div>
 
                 <div class="col-md-5">
                     <label for="spec" class="form-label">Специальность</label>
                     <select class="form-select" id="spec" required="">
-                        <option value="">Выбрать...</option>
-                        <option>Гастроэнтеролог</option>
-                        <option>Дерматовенеролог</option>
-                        <option>Инфекционист</option>
-                        <option>Кардиолог</option>
-                        <option>Невролог</option>
-                        <option>Офтальмолог</option>
-                        <option>Терапевт</option>
-                        <option>Хирург</option>
+                        <option value="empty">Выбрать...</option>
+                        <option value="Гастроэнтеролог">Гастроэнтеролог</option>
+                        <option value="Дерматовенеролог">Дерматовенеролог</option>
+                        <option value="Инфекционист">Инфекционист</option>
+                        <option value="Кардиолог">Кардиолог</option>
+                        <option value="Невролог">Невролог</option>
+                        <option value="Офтальмолог">Офтальмолог</option>
+                        <option value="Терапевт">Терапевт</option>
+                        <option value="Хирург">Хирург</option>
 
                     </select>
                 </div>
 
+<!--                __________ начало ______________________
+                    это select где вы хотите отображать что-либо
+                    изначально он пустой `style="display: none"`
+                    Чтобы он показывался или отображался нужно отпрравить запрос на БЭК и получить список докторов по этой специальности
+                    для этого я использовал  $.ajax - запрос, который позволяет отправить запрос на БЭК без перезагрузки страницы!!
+-->
+                <div class="col-md-5" id="doctor_block" style="display: none">
+                    <label for="spec" class="form-label">Специалист</label>
+                    <select class="form-select" id="doctor" required="">
+                        <option value="">Выбрать...</option>
+                    </select>
+                </div>
+
+                <script>
+                    // $("#spec").on("change" - это лисенер события когда мы выбираем специальность
+
+                    $("#spec").on("change",
+                        function () {
+                            var value = this.value;
+                            console.log(value);
+                            if (value == 'empty') {
+                                $("#doctor_block").hide();
+                                clearOption($("#doctor"));
+
+                            }
+
+                            $.ajax({
+                                url: "/get-fio-list",
+                                method: 'GET',
+                                data: {
+                                    someSpec: value
+                                },
+                                success: function (data) {
+                                    if (data != "") {
+                                        var select = $("#doctor");
+                                        clearOption(select);
+                                        select.append('<option value="">Выбрать...</option>');
+                                        for (let index = 0; index < data.length; index++) {
+                                            let elem = data[index];
+                                            let fio = elem.firstname + elem.lastname + elem.email;
+                                            select.append('<option value="' + elem.id + '">' + fio + '</option>');
+                                        }
+                                        $("#doctor_block").show();
+                                    } else {
+                                        $("#doctor_block").hide();
+                                        clearOption($("#doctor"));
+                                    }
+                                }
+                            });
+                        });
+
+                        function clearOption(select) {
+                            select.find("option").remove();
+                        }
+                </script>
+<!--                _______________конец _____________________-->
                 <hr class="my-4">
 
-                <h5 class="mb-3">Рабочие дни</h5><div class="form-check form-check-inline">
+                <h5 class="mb-3">Рабочие дни</h5>
+                <div class="form-check form-check-inline">
 
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" id="monday" value="monday">
@@ -109,61 +172,74 @@
                         <label class="form-check-label" for="wednesday">ср</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="friday" value="friday" >
+                        <input class="form-check-input" type="checkbox" id="friday" value="friday">
                         <label class="form-check-label" for="friday">пт</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="sunday" value="sunday" >
+                        <input class="form-check-input" type="checkbox" id="sunday" value="sunday">
                         <label class="form-check-label" for="sunday">вс</label>
                     </div>
                     <br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="tuesday" value="tuesday" >
+                        <input class="form-check-input" type="checkbox" id="tuesday" value="tuesday">
                         <label class="form-check-label" for="tuesday">вт</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="thursday" value="thursday" >
+                        <input class="form-check-input" type="checkbox" id="thursday" value="thursday">
                         <label class="form-check-label" for="thursday">чт</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="saturday" value="saturday" >
+                        <input class="form-check-input" type="checkbox" id="saturday" value="saturday">
                         <label class="form-check-label" for="saturday">сб</label>
                     </div>
 
-                <hr class="my-4">
+                    <hr class="my-4">
 
-                <h5 class="mb-3">Часы работы</h5>
+                    <h5 class="mb-3">Часы работы</h5>
 
-                <div class="row gy-3">
-                    <div class="col-md-6">
-                        <label for="timeFrom" class="form-label">с</label>
-                        <input type="text" class="form-control" id="timeFrom">
+                    <div class="row gy-3">
+                        <div class="col-md-6">
+                            <label for="timeFrom" class="form-label">с</label>
+                            <input type="text" class="form-control" id="timeFrom">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="timeTo" class="form-label">по</label>
+                            <input type="text" class="form-control" id="timeTo">
+                        </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <label for="timeTo" class="form-label">по</label>
-                        <input type="text" class="form-control" id="timeTo">
-                    </div>
+                    <hr class="my-4">
+
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Сохранить</button>
                 </div>
-
-                <hr class="my-4">
-
-            <button class="w-100 btn btn-primary btn-lg" type="submit">Сохранить</button>
-
-        </form>
-
-    </div>
-
-    <div class="main-container">
-        <div class="profile">
-            <img src="https://cdn-icons-png.flaticon.com/512/194/194915.png">
+            </div>
         </div>
+    </form>
 
+</div>
+
+<div class="main-container">
+    <div class="profile">
+        <img src="https://cdn-icons-png.flaticon.com/512/194/194915.png">
     </div>
+
+</div>
 
     <div class="load-container">
-            <input type="file" name="photo" multiple accept="image/*,image/jpeg"></p>
+        <input id="fileupload" type="file" name="fileupload" />
+        <button id="upload-button" onclick="uploadFile()"> Upload </button>
     </div>
-
+<script>
+    async function uploadFile() {
+        let formData = new FormData();
+        formData.append("file", fileupload.files[0]);
+        await fetch('/upload-file', {
+            method: "POST",
+            body: formData
+        });
+        alert('The file has been uploaded successfully.');
+    }
+</script>
 </body>
 </html>
